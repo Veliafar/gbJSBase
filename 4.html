@@ -34,15 +34,7 @@
 
   let result = '';
 
-  if (splittedNum.length === 1) {
-    result = `В числе ${numFromUser} количество единиц: ${splittedNum[0]}`
-  }
-  if (splittedNum.length === 2) {
-    result = `В числе ${numFromUser} количество десятков: ${splittedNum[0]}, единиц: ${splittedNum[1]}`
-  }
-  if (splittedNum.length >= 3) {
-    result = `В числе ${numFromUser} количество сотен: ${splittedNum[splittedNum.length - 3]}, десятков: ${splittedNum[splittedNum.length - 2]}, единиц: ${splittedNum[splittedNum.length - 1]}`
-  }
+  result = `В числе ${numFromUser} количество сотен: ${splittedNum?.[splittedNum.length - 3] || 0}, десятков: ${splittedNum?.[splittedNum.length - 2] || 0}, единиц: ${splittedNum[splittedNum.length - 1]}`;
 
   alert(result);
 </script>
