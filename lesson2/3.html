@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Homework</title>
-</head>
-<body>
-<!--
+  <head>
+    <meta charset="UTF-8">
+    <title>Homework</title>
+  </head>
+  <body>
+    <!--
 Обязательное задание.
 
 Необходимо попросить пользователя ввести два числа в переменные `a` и `b`.
@@ -18,10 +18,30 @@
 `a` и `b`.
 В остальных случаях программа не должна ничего выводить.
 -->
-<script>
-  "use strict";
+    <script>
+      
+      "use strict";
 
-  // Здесь пишем решение, данный комментарий необходимо стереть.
-</script>
-</body>
+      mathNumbers();
+
+      function mathNumbers() {
+        const a = +prompt('Введите число A');
+        const b = +prompt('Введите число B');
+
+        if (isNaN(a) || isNaN(b)) {
+          return;
+          
+        } else if (a > 0 && b > 0) {
+          console.log(a - b);
+
+        } else if (a < 0 && b < 0) {
+          console.log(a * b);
+
+        } else if (Math.sign(a) !== Math.sign(b)) {
+          console.log(a + b);
+        }
+      }
+  
+  </script>
+  </body>
 </html>
