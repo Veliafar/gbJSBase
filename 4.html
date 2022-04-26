@@ -28,7 +28,15 @@
 <script>
   "use strict";
 
-  // Здесь пишем решение, данный комментарий необходимо стереть.
+  const numFromUser = prompt('Введите целое положительное число!');
+
+  const splittedNum = numFromUser.split('');
+
+  let result = '';
+
+  result = `В числе ${numFromUser} количество сотен: ${splittedNum?.[splittedNum.length - 3] || 0}, десятков: ${splittedNum?.[splittedNum.length - 2] || 0}, единиц: ${splittedNum[splittedNum.length - 1]}`;
+
+  alert(result);
 </script>
 </body>
 </html>
