@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Homework</title>
-</head>
-<body>
-<!--
+  <head>
+    <meta charset="UTF-8">
+    <title>Homework</title>
+  </head>
+  <body>
+    <!--
 Обязательное задание.
 
 Необходимо реализовать четыре функции, каждая функция должна принимать по два
@@ -28,10 +28,83 @@
 
 Необходимо для всех функций прописать комментарии jsdoc https://jsdoc.app/.
 -->
-<script>
-  "use strict";
 
-  // Здесь пишем решение, данный комментарий необходимо стереть.
-</script>
-</body>
+    <script>
+      "use strict";
+
+      const a = +prompt('Ведите число A');
+      const b = +prompt('Ведите число B');
+
+      const numberOfMethod = +prompt('Ведите номер функции:  \n\n  1 - вернуть сумму\n\n  2 - вернуть разность\n\n 3 - вернуть произведение\n\n 4 - вернуть деление\n\n');
+
+      switch(numberOfMethod) {
+        case 1:
+          alert(sum(a, b));
+          break;
+        
+        case 2:
+          alert(difference(a, b));
+          break;
+
+        case 3:
+          alert(multiply(a, b));
+          break;
+
+        case 4:
+          alert(del(a, b));
+          break;
+
+        default:
+          break;
+      }
+      
+      /**
+       * sum function 
+       * @param {any} a
+       * @param {any} b
+       * @returns {any} 
+       */
+      function sum(a, b) {
+        return a + b;
+      }
+
+      /**
+       * difference function
+       * @param {any} a
+       * @param {any} b
+       * @returns {any}
+       */
+      function difference(a, b) {
+        if (a === b) {
+          return 0;
+        }
+
+        return a > b 
+          ? a - b 
+          : b - a
+          ;
+      }
+      
+      /**
+       * multiply function
+       * @param {any} a
+       * @param {any} b
+       * @returns {any}
+       */
+      function multiply(a, b) {
+        return a * b;
+      }
+
+      /**
+       * del function
+       * @param {any} a
+       * @param {any} b
+       * @returns {any}
+       */
+      function del(a, b) {
+        return a / b;
+      }
+      
+  </script>
+  </body>
 </html>
