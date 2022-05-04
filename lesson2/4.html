@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Homework</title>
+  </head>
+  <body>
+    <!--
+Обязательное задание.
+
+Необходимо реализовать четыре функции, каждая функция должна принимать по два
+числа и выполнять одну из операций (каждая функция выполняет одну из них):
+1. Сложение
+2. Разность
+3. Умножение
+4. Деление
+
+Необходимо сделать так, чтобы функция вернула число, например выражение
+`console.log(sum(2, 6));` должно вывести число 8 в консоль (sum - функция
+сложения в данном примере, ваши названия функций могут отличаться).
+
+Округлять значения, которые возвращают функции не нужно, однако, обратите
+внимание на разность, функция должна вычесть из большего числа меньшее, либо
+вернуть 0, если числа равны.
+
+Функциям всегда передаются корректные числа, проверки на NaN, Infinity делать
+не нужно.
+
+Необходимо для всех функций прописать комментарии jsdoc https://jsdoc.app/.
+-->
+
+    <script>
+      "use strict";
+
+      const a = +prompt('Ведите число A');
+      const b = +prompt('Ведите число B');
+
+      const numberOfMethod = +prompt('Ведите номер функции:  \n\n  1 - вернуть сумму\n\n  2 - вернуть разность\n\n 3 - вернуть произведение\n\n 4 - вернуть деление\n\n');
+
+      switch(numberOfMethod) {
+        case 1:
+          alert(sum(a, b));
+          break;  
+        case 2:
+          alert(difference(a, b));
+          break;
+        case 3:
+          alert(multiply(a, b));
+          break;
+        case 4:
+          alert(del(a, b));
+          break;
+        default:
+          break;
+      }
+      
+      /**
+       * sum function 
+       * @param {number} a
+       * @param {number} b
+       * @returns {number} 
+       */
+      function sum(a, b) {
+        return a + b;
+      }
+
+      /**
+       * difference function
+       * @param {number} a
+       * @param {number} b
+       * @returns {number}
+       */
+      function difference(a, b) {
+        if (a === b) {
+          return 0;
+        }
+
+        return a > b 
+          ? a - b 
+          : b - a
+          ;
+      }
+      
+      /**
+       * multiply function
+       * @param {number} a
+       * @param {number} b
+       * @returns {number}
+       */
+      function multiply(a, b) {
+        return a * b;
+      }
+
+      /**
+       * del function
+       * @param {number} a
+       * @param {number} b
+       * @returns {number}
+       */
+      function del(a, b) {
+        return a / b;
+      }
+      
+  </script>
+  </body>
+</html>

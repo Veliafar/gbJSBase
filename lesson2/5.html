@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Homework</title>
+  </head>
+  <body>
+    <!--
+Обязательное задание.
+
+Необходимо скопировать и вставить в данный скрипт все функции из 4 задания.
+Необходимо реализовать функцию:
+mathOperation(arg1, arg2, operation);
+Параметры:
+arg1 - первое число.
+arg2 - второе число.
+operation - строка, которая содержит один символ из: "+", "-", "*", "/".
+Функция mathOperation должна вернуть результат операции, который был передан в
+параметр operation для двух первых аргументов (arg1 и arg2).
+Функция mathOperation должна использовать для вычисления функции из 4 задания.
+
+Примеры вызова функции:
+console.log(mathOperation(5, 3, "+")); // 8
+console.log(mathOperation(5, 3, ":)")); // NaN
+
+Функции mathOperation всегда передаются корректные числа, проверки на NaN,
+Infinity делать не нужно, однако, в случае если был передан некорректный
+аргумент в параметр operation, необходимо вернуть NaN.
+
+Необходимо для всех функций прописать комментарии jsdoc https://jsdoc.app/.
+-->
+    <script>
+      "use strict";
+
+      const a = +prompt('Ведите число A');
+      const b = +prompt('Ведите число B');
+
+      const operation = prompt('Ведите знак действия:  \n\n  + \n\n  -  \n\n  *  \n\n  \\  \n\n');
+
+      console.log(mathOperation(a, b, operation));
+
+      alert(mathOperation(a, b, operation));
+
+      /**
+       * @date 2022-04-26
+       * @param {number} arg1
+       * @param {number} arg2
+       * @param {string} operation ==> '+' || '-' || '*' || '/'
+       * @returns {number || NaN}
+       */
+      function mathOperation(arg1, arg2, operation) {
+        switch(operation) {
+          case '+':
+            return sum(a, b);        
+          case '-':
+            return difference(a, b);
+          case '*':
+            return multiply(a, b);        
+          case '/':
+            return del(a, b);
+          default:
+            return NaN;
+        }
+      }
+
+      /**
+       * sum function 
+       * @param {number} a
+       * @param {number} b
+       * @returns {number} 
+       */
+       function sum(a, b) {
+        return a + b;
+      }
+
+      /**
+       * difference function
+       * @param {number} a
+       * @param {number} b
+       * @returns {number}
+       */
+      function difference(a, b) {
+        if (a === b) {
+          return 0;
+        }
+
+        return a > b 
+          ? a - b 
+          : b - a
+          ;
+      }
+      
+      /**
+       * multiply function
+       * @param {number} a
+       * @param {number} b
+       * @returns {number}
+       */
+      function multiply(a, b) {
+        return a * b;
+      }
+
+      /**
+       * del function
+       * @param {number} a
+       * @param {number} b
+       * @returns {number}
+       */
+      function del(a, b) {
+        return a / b;
+      }
+    </script>
+  </body>
+</html>
