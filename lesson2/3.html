@@ -29,9 +29,10 @@
         const b = +prompt('Введите число B');
 
         if (isNaN(a) || isNaN(b)) {
-          return;
-          
-        } else if (a > 0 && b > 0) {
+          return;          
+        }
+         
+        if (a > 0 && b > 0) {
           console.log(a - b);
 
         } else if (a < 0 && b < 0) {
@@ -40,6 +41,7 @@
         } else if (Math.sign(a) !== Math.sign(b)) {
           console.log(a + b);
         }
+         
       }
   
   </script>
