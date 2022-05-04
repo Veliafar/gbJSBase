@@ -39,7 +39,20 @@
     ],
   };
 
-  // Здесь пишем решение, данный комментарий необходимо стереть.
+  console.log(post.author);
+
+  for (const comment of post.comments) {
+    if (comment.userId === 10) {
+      console.log(comment.rating.dislikes);
+      continue;
+    }
+    if (comment.userId === 5) {
+      console.log(comment.userId);
+      console.log(comment.text);
+      continue;
+    }
+  }
+
 </script>
 </body>
 </html>
