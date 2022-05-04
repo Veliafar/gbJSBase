@@ -40,18 +40,9 @@
   };
 
   console.log(post.author);
-
-  for (const comment of post.comments) {
-    if (comment.userId === 10) {
-      console.log(comment.rating.dislikes);
-      continue;
-    }
-    if (comment.userId === 5) {
-      console.log(comment.userId);
-      console.log(comment.text);
-      continue;
-    }
-  }
+  console.log(post.author.comments[0].rating.dislikes);
+  console.log(post.author.comments[1].userId);
+  console.log(post.author.comments[1].text);
 
 </script>
 </body>
