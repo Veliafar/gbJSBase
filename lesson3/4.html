@@ -47,8 +47,7 @@
   const productsWithImages = products.filter((product) => product.photos?.length);
   console.log('productsWithImages', productsWithImages);
 
-  const sortedProductByPriceAsc = products.sort( (a,b) => a.price - b.price);
-  console.log('sortedProductByPriceAsc', sortedProductByPriceAsc);
+  console.log('sortedProductByPriceAsc', products.sort((a, b) => a.price - b.price));
 
 </script>
 </body>
