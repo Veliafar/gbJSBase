@@ -31,7 +31,61 @@
 <script>
   "use strict";
 
-  // Здесь пишем решение, данный комментарий необходимо стереть.
+  class DigitsOfNumber {
+    constructor(units, dozens, hundreds) {
+      this.units = units;
+      this.dozens = dozens;
+      this.hundreds = hundreds;
+    }
+
+    printDigitsOfNumber() {
+      console.group('printDigitsOfNumber');
+      console.log('units', this.units);
+      console.log('dozens', this.dozens);
+      console.log('hundreds', this.hundreds);
+      console.groupEnd();
+    }
+  }
+
+  /**
+   * @param {int} number
+   * @returns {DigitsOfNumber || {}}
+   */
+  function getDigitsOfNumber(number) {
+    if (
+      Number.isNaN(number) 
+      || !Number.isInteger(number) 
+      || number < 0
+      || number > 999
+    ) {
+      console
+        .warn(
+          'Введенное число не является целым положительны в диапазоне от 0 до 999 включительно'
+        );
+        return {};
+    }
+
+    const units = number % 10;
+    const numberAsString = number.toString();
+    const splittedNumber = numberAsString.split(''); 
+    const dozens = splittedNumber?.length >= 2 ? +splittedNumber[splittedNumber?.length - 2] : 'нет десятков';
+    const hundreds = splittedNumber?.length >= 3 ? +splittedNumber[splittedNumber?.length - 3] : 'нет сотен';
+
+    return new DigitsOfNumber(units, dozens, hundreds);
+  }
+
+  const number = +prompt(
+      'Введите целое положительное число от 0 до 999 включительно'
+    );
+
+  const digitsOfNumber = getDigitsOfNumber(number);
+  console.log(digitsOfNumber);
+  
+
+  if (digitsOfNumber?.constructor?.name === 'DigitsOfNumber') {
+    digitsOfNumber.printDigitsOfNumber();
+  }
+  
 </script>
 </body>
 </html>
