@@ -20,33 +20,31 @@
 <script>
   "use strict";
 
+  function printData(obj, esType) {
+    console.group('Product' + ' ES' + esType);
+    console.log('name', obj.name);
+    console.log('price', obj.price + ' ₽');
+    console.groupEnd();
+  }
+
   function ProductES5(name, price) {
     this.name = name;
     this.price = price;
-
-    this.make25Discount = function() {
-      this.price -= (this.price / 100 * 25);
-    }
-
-    this.printProduct = function() {
-      console.group('ProductES5');
-      console.log('name', this.name);
-      console.log('price', this.price + ' ₽');
-      console.groupEnd();
-    }
+  }
+  ProductES5.prototype.make25Discount = function() {
+    this.price -= (this.price / 100 * 25);
   }
 
   const productES5 = new ProductES5('Бутылка воды 1.5л', 100);
 
-  productES5.printProduct();
+  
+  printData(productES5, 5);
   productES5.make25Discount();
-  productES5.printProduct();
+  printData(productES5, 5);
 
 
 
   class ProductES6 {
-    name = '';
-    price = 0;
 
     constructor(name, price) {
       this.name = name;
@@ -56,20 +54,13 @@
     make25Discount() {
       this.price -= (this.price / 100 * 25);
     }
-
-    printProduct() {
-      console.group('ProductES6');
-      console.log('name', this.name);
-      console.log('price', this.price + ' ₽');
-      console.groupEnd();
-    }
   }
 
   const productES6 = new ProductES6('ЯСмартфон', 100000);
 
-  productES6.printProduct();
+  printData(productES6, 6);
   productES6.make25Discount();
-  productES6.printProduct();
+  printData(productES6, 6);
 
 </script>
 </body>

@@ -50,7 +50,113 @@
 <script>
   "use strict";
 
-  // Здесь пишем решение, данный комментарий необходимо стереть.
+  function printData(obj, esType) {
+    console.group('Product' + ' ES' + esType);
+    console.log('author', obj.author);
+    console.log('text', obj.text);
+    console.log('writtenAt', new Intl.DateTimeFormat("ru", 
+      {
+        dateStyle: "medium",
+        timeStyle: "medium"
+      })
+      .format(obj.writtenAt));
+    console.groupEnd();
+  }
+
+  function printDataAttachedPost(obj, esType) {
+    console.group('Product' + ' ES' + esType);
+    console.log('author', obj.author);
+    console.log('text', obj.text);
+    console.log('writtenAt', new Intl.DateTimeFormat("ru", 
+      {
+        dateStyle: "medium",
+        timeStyle: "medium"
+      })
+      .format(obj.writtenAt));
+    console.log('highlight', obj.highlighted);
+    console.groupEnd();
+  }
+
+  function PostES5(author, text) {
+    this.author = author;
+    this.text = text;
+    this.writtenAt = new Date();    
+  }
+
+  PostES5.prototype.edit = function(text) {
+    this.text = text;
+    this.writtenAt = new Date();
+  }
+
+  class PostES6 {
+
+    constructor(author, text) {
+      this.author = author;
+      this.text = text;
+      this.writtenAt = new Date();
+    }
+
+    edit(text) {
+      this.text = text;
+      this.writtenAt = new Date();
+    }
+  }
+
+  const postES5 = new PostES5('Дима', 'Привет');
+  printData(postES5, 5);
+  postES5.edit('Пока');
+  printData(postES5, 5);
+
+  const postES6 = new PostES6('Андрей', 'Привет');
+  printData(postES6, 6);
+  postES6.edit('Пока');
+  printData(postES6, 6);
+
+
+
+  function AttachedPostES5(author, text) {
+    PostES5.call(this, author, text);
+
+    this.highlighted = false;
+  }
+
+  AttachedPostES5.prototype = Object.create(PostES5.prototype);
+  AttachedPostES5.prototype.constructor = AttachedPostES5;
+  
+  AttachedPostES5.prototype.makeTextHighlighted = function(switchValue = true) {
+    this.highlighted = switchValue;
+  }
+
+  const attachedPostES5 = new AttachedPostES5('Игорь', 'Привет');
+
+
+
+  class AttachedPostES6 extends PostES6 {
+
+    constructor(author, text) {
+      super(author, text);
+
+      this.highlighted = false;
+    }
+
+    makeTextHighlighted(switchValue = true) {
+      this.highlighted = switchValue;
+    }
+  }
+
+  const attachedPostES6 = new AttachedPostES6('Евгений', 'Привет');
+
+
+  printDataAttachedPost(attachedPostES5, 5);
+  attachedPostES5.makeTextHighlighted();
+  printDataAttachedPost(attachedPostES5, 5);
+
+
+  printDataAttachedPost(attachedPostES6, 6);
+  attachedPostES6.makeTextHighlighted();
+  printDataAttachedPost(attachedPostES6, 6);
+
+
 </script>
 </body>
 </html>
