@@ -99,22 +99,23 @@
   Вывод каждого атрибута и значений должен выглядеть следующим образом (пример):
   Атрибут "class" содержит значение "btn btn-secondary dropdown-toggle"
    */
-  const elWithBtnAndDropdownToggleClasses = document
-    .querySelector('.btn,.dropdown-toggle');
-    
-    for (const attribute of elWithBtnAndDropdownToggleClasses.attributes) {
-      console.log(
+
+  NamedNodeMap.prototype.forEach = Array.prototype.forEach; 
+
+  document
+    .querySelector('.btn,.dropdown-toggle')
+    .attributes
+    .forEach(attribute => console.log(
         `%cАтрибут `
-        +`%c${attribute.name}`
+        +`%c"${attribute.name}"`
         +`%c содержит значение `
         +`%c"${attribute.value}"`,
          'color: white',
          'color: #e52165',
          'color: white',
          'background-color: #e8d21d;color: black'
-        );
-    }
-
+      )
+    );
 
 </script>
 </body>
