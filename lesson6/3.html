@@ -37,12 +37,39 @@
   1. При наведении на любую из звезд, данной звезде должен ставиться класс
   golden, также такой класс должен ставиться всем звездам до нее слева.
   */
+  const starsContainer = document.querySelector('.stars_container');
+
+  for (var i = 0; i < starsContainer.children.length; i++) {
+    starsContainer.children[i].addEventListener('mouseenter', (e)=> {
+    
+      const itemIndex = Array.from(starsContainer.children).indexOf(e.target);
+
+      for (let index = 0; index < starsContainer.children.length; index++) {
+        starsContainer.children[index].classList.remove('golden');
+      }
+      
+      for (let index = 0; index <= itemIndex; index++) {  
+        starsContainer.children[index].classList.add('golden');
+      }
+
+    }) 
+  }
 
 
   /*
   2. Когда мы уводим курсор мыши от звезды, все поставленные классы из первого
   задания должны быть удалены.
    */
+   for (var i = 0; i < starsContainer.children.length; i++) {
+    starsContainer.children[i].addEventListener('mouseleave', (e)=> {
+
+
+      for (let index = 0; index < starsContainer.children.length; index++) {
+        starsContainer.children[index].classList.remove('golden');
+      }
+
+    }) 
+  }
 
 
   /*
@@ -50,7 +77,10 @@
   звезды (временно могут становиться черными). Почему так? Напишите словами.
   Можем ли мы это исправить? Если да, то предложите решение.
   */
-
+  // мы уводим курсор со звезды и классы убираются.
+  // можно повесть событие mouseleave на контейнер
+  // и сделать размер контейнера по контенту, чтобы
+  // событие работало верно
 
 </script>
 </body>
