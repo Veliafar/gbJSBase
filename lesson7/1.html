@@ -9,6 +9,7 @@
     .nav {
       margin-top: 30px;
     }
+
     #inputDiv {
       font-size: 30px;
     }
@@ -60,17 +61,19 @@
     H99: "Однако, программирование, в итоге, принесет свои плоды.",
   };
 
+  let activeEl = document.querySelector('.active');
+  const textEl = document.querySelector('.text');
   document.querySelector('.nav')
     .addEventListener('click', (e) => {
-      if (e.target.classList.contains('nav-link')
-        && !e.target.classList.contains('active')) {
-        [...document.querySelectorAll('.nav-link')].forEach((navLink) => {
-          navLink.classList.remove('active');
-        });
-        e.target.classList.add('active');
-        document.querySelector('.text')
-          .textContent = panelText[e.target.parentElement.dataset.text];
+      if (!e.target.classList.contains('nav-link')
+        || e.target.classList.contains('active')) {
+        return;
       }
+      activeEl.classList.remove('active');
+      e.target.classList.add('active');
+      activeEl = e.target;
+
+      textEl.textContent = panelText[e.target.parentElement.dataset.text];
     });
 
 
@@ -80,9 +83,18 @@
   шрифт у текста, никакого резкого увеличения шрифта не должно быть при
   перетаскивании ползунка.
    */
-  document.querySelector('input')
+
+  const inputEl = document.querySelector('input');
+  const inputDivEl = document.querySelector('#inputDiv');
+
+  const inputDivElDefaultFontSize = getComputedStyle(inputDivEl)
+    .fontSize
+    .replace(/\D/g,'');
+
+  inputEl.value = inputDivElDefaultFontSize;
+  inputEl
     .addEventListener('input', (e) => {
-      document.querySelector('#inputDiv')
+      inputDivEl
         .style.fontSize = e.target.value + 'px';
     });
 
