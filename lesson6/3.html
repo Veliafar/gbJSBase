@@ -44,20 +44,12 @@
 
   for (let i = 0; i < starsContainer.children.length; i++) {
     starsContainer.children[i].addEventListener('mouseenter', (e) => {
-
       const itemIndex = Array.from(starsContainer.children).indexOf(e.target);
-
-      for (let index = 0; index < starsContainer.children.length; index++) {
-        starsContainer.children[index].classList.remove('golden');
-      }
-
       for (let index = 0; index <= itemIndex; index++) {
         starsContainer.children[index].classList.add('golden');
       }
-
-    })
+    });
   }
-
 
   /*
   2. Когда мы уводим курсор мыши от звезды, все поставленные классы из первого
@@ -70,8 +62,6 @@
       }
     });
   }
-
-
   /*
   3. Когда мы переводим мышь от одной звезды к другой, у нас могут мигать
   звезды (временно могут становиться черными). Почему так? Напишите словами.
@@ -81,6 +71,8 @@
   // можно повесть событие mouseleave на контейнер
   // и сделать размер контейнера по контенту, чтобы
   // событие работало верно
+
+  document.querySelector('.stars_container').style.display = 'flex';
 
 </script>
 </body>
