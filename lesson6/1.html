@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>Homework</title>
-    <style>
+<head>
+  <meta charset="UTF-8">
+  <title>Homework</title>
+  <style>
     .product {
       width: 200px;
       padding: 10px;
@@ -12,48 +12,46 @@
       box-shadow: 0 0 4px black;
     }
   </style>
-  </head>
-  <body>
-    <!--
+</head>
+<body>
+<!--
 Обязательное задание.
 
 Выполнить все задачи в теге script. Комментарии, в которых написаны задачи, не
 стирать, код с решением задачи пишем под комментарием.
 -->
-    <div class="product">
-      <div class="productName">Товар 1</div>
-      <img src="https://picsum.photos/id/367/200/300" alt="">
-      <button>В корзину</button>
-    </div>
-    <div class="product">
-      <div class="productName">Товар 2</div>
-      <img src="https://picsum.photos/id/425/200/300" alt="">
-      <button>В корзину</button>
-    </div>
-    <div class="product">
-      <div class="productName">Товар 3</div>
-      <img src="https://picsum.photos/id/429/200/300" alt="">
-      <button>В корзину</button>
-    </div>
+<div class="product">
+  <div class="productName">Товар 1</div>
+  <img src="https://picsum.photos/id/367/200/300" alt="">
+  <button>В корзину</button>
+</div>
+<div class="product">
+  <div class="productName">Товар 2</div>
+  <img src="https://picsum.photos/id/425/200/300" alt="">
+  <button>В корзину</button>
+</div>
+<div class="product">
+  <div class="productName">Товар 3</div>
+  <img src="https://picsum.photos/id/429/200/300" alt="">
+  <button>В корзину</button>
+</div>
 
-    <script>
+<script>
   "use strict";
 
   /*
   1. Установите всем элементам с классом "productName" размер шрифта 24px.
    */
-  document
-    .querySelectorAll('.productName')
-    .forEach((el)=> {
+  document.querySelectorAll('.productName')
+    .forEach((el) => {
       el.style.fontSize = '24px';
     });
 
   /*
   2. Установите всем элементам с классом "product" внешний отступ справа 50px.
    */
-   document
-    .querySelectorAll('.product')
-    .forEach((el)=> {
+  document.querySelectorAll('.product')
+    .forEach((el) => {
       el.style.marginRight = '50px';
     });
 
@@ -62,13 +60,12 @@
   3. При клике на кнопку "В корзину" название кнопки должно поменяться на
   "Добавлено" и кнопка должна стать неактивной.
    */
-    const buttons = document.querySelectorAll('button');
-
-    for (const button of buttons) {
-      button.addEventListener('click', () => {
-        button.textContent = 'Добавлено';
-      })
+  document.querySelector('body').addEventListener('click', (e) => {
+    if (e.target.tagName === 'BUTTON') {
+      e.target.textContent = 'Добавлено';
+      e.target.disabled = true;
     }
+  })
 
   /*
   4. Создайте полную (глубокую) копию элемента с классом product, измените в
@@ -79,40 +76,25 @@
   должен правильно работать код из 3-го задания.
    */
 
-  const products = document
-    .querySelectorAll('.product');
-  
+  const products = document.querySelectorAll('.product');
   const product = products[0].cloneNode(true);
-  
-  for (const element of product.children) {
-    if (element.className === 'productName') {
-      element.textContent = 'Товар 4';
-    }
-    if (element => element.tagName === 'IMG') {
-      element.src = 'https://picsum.photos/id/1080/200/300';
-    }
-    if (element => element.tagName === 'BUTTON') {
-      element.addEventListener('click', () => {
-        element.textContent = 'Добавлено';
-      });
-    }
-  }
 
-  products[products.length - 1].replaceWith( product);
+  product.querySelector('.productName').textContent = 'Товар 4';
+  product.querySelector('img').src = 'https://picsum.photos/id/1080/200/300';
+  products[products.length - 1].replaceWith(product);
 
   /*
   5. По истечении 2 секунд с момента открытия страницы первый товар должен быть
   удален из html.
    */
 
-   document.addEventListener('DOMContentLoaded', () => {
-     setTimeout(()=>{
-      const buttons = document.querySelectorAll('.product');
-      buttons[0].remove();
-     }, 2000);
-   })
+  document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+      document.querySelector('.product').remove();
+    }, 2000);
+  })
 
 
 </script>
-  </body>
+</body>
 </html>

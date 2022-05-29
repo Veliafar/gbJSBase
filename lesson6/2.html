@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>Homework</title>
-    <link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css">
-    <style>
+<head>
+  <meta charset="UTF-8">
+  <title>Homework</title>
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css">
+  <style>
     .message {
       width: 150px;
       padding: 20px;
@@ -13,51 +13,52 @@
       border: 1px solid orange;
       visibility: hidden;
     }
+
     .error {
       border: 0.3rem solid red;
     }
   </style>
-  </head>
-  <body>
-    <!--
+</head>
+<body>
+<!--
 Обязательное задание.
 
 Выполнить все задачи в теге script. Комментарии, в которых написаны задачи, не
 стирать, код с решением задачи пишем под комментарием.
 -->
-    <input id="from" type="text">
-    В инпуте написано: <span></span>
+<input id="from" type="text">
+В инпуте написано: <span></span>
 
-    <br>
+<br>
 
-    <button class="messageBtn">Показать блок</button>
-    <div class="message">
-      Привет :)
-    </div>
+<button class="messageBtn">Показать блок</button>
+<div class="message">
+  Привет :)
+</div>
 
-    <br>
+<br>
 
-    <form>
-      <label>
-        Первый инпут:
-        <input class="form-control" type="text">
-      </label>
-      <br>
-      <br>
-      <label>
-        Второй инпут:
-        <select class="form-control">
-          <option value=""></option>
-          <option value="1">Один</option>
-          <option value="2">Два</option>
-        </select>
-      </label>
-      <br>
-      <br>
-      <button>Отправить</button>
-    </form>
+<form>
+  <label>
+    Первый инпут:
+    <input class="form-control" type="text">
+  </label>
+  <br>
+  <br>
+  <label>
+    Второй инпут:
+    <select class="form-control">
+      <option value=""></option>
+      <option value="1">Один</option>
+      <option value="2">Два</option>
+    </select>
+  </label>
+  <br>
+  <br>
+  <button>Отправить</button>
+</form>
 
-    <script>
+<script>
   "use strict";
 
   /*
@@ -65,14 +66,13 @@
   должно моментально отображаться в span. То есть при печати в input'е тег span
   также должен меняться.
   */
-  
-  document
-    .getElementById('from')
+
+  document.getElementById('from')
     .addEventListener('input', (e) => {
       document
         .querySelector('span')
         .textContent = e.target.value;
-  })
+    });
 
   /*
   2. При клике на кнопку с классом messageBtn необходимо элементу с классом
@@ -80,17 +80,13 @@
   1) добавить два класса: animate__animated и animate__fadeInLeftBig
   2) поставить данному элементу стиль visibility в значение 'visible'.
    */
-  document
-    .querySelector('.messageBtn')
+  document.querySelector('.messageBtn')
     .addEventListener('click', () => {
       const message = document.querySelector('.message');
-        if (message.classList.contains('animate__animated')) {
-          return;
-        }
-        message.classList.add('animate__animated');
-        message.classList.add('animate__fadeInLeftBig');
-        message.style.visibility = 'visible';
-    })
+      message.classList.add('animate__animated');
+      message.classList.add('animate__fadeInLeftBig');
+      message.style.visibility = 'visible';
+    });
 
   /*
   3. Необходимо при отправке формы проверить, заполнены ли все поля в этой
@@ -103,40 +99,37 @@
   данному полю).
   Если поле было чем-либо заполнено, подсветку (класс error) необходимо убрать.
    */
-  
-   const formData = document
-    .querySelector('form');
 
-    function iterateFormValues(form, func) {
-      for (const elem of form.elements) {
-        if (elem.tagName === 'INPUT' || elem.tagName === 'SELECT') {
-          func(elem);
-        }
+  const formData = document.querySelector('form');
+
+  function iterateFormValues(form, func) {
+    for (const elem of form.elements) {
+      if (elem.tagName === 'INPUT' || elem.tagName === 'SELECT') {
+        func(elem);
       }
     }
+  }
 
+  iterateFormValues(formData, (input) => {
+    input.addEventListener('input', (e) => {
+      if (e.target.value === '') {
+        e.target.classList.add('error');
+      } else {
+        e.target.classList.remove('error');
+      }
+    });
+  });
+
+
+  formData.addEventListener('submit', (e) => {
     iterateFormValues(formData, (input) => {
-      input.addEventListener('input', (e) => {
-          if(!e.target.value) {
-            e.target.classList.add('error');
-          } else if(e.target.value) {
-            e.target.classList.remove('error');
-          }
-        });
+      if (input.value === '') {
+        e.preventDefault();
+        input.classList.add('error');
+      }
     });
-
-    
-
-
-    formData.addEventListener('submit', (e) => {      
-      iterateFormValues(formData, (input) => {
-        if (!input.value) {
-            e.preventDefault();
-            input.classList.add('error');
-          }
-      })
-    });
+  });
 
 </script>
-  </body>
+</body>
 </html>
