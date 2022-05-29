@@ -25,8 +25,25 @@
    * параметр "n"
    */
   function descendingOrder(n) {
+    if (!Number.isInteger(n) || Math.sign(n) < 1) {
+      return NaN;
+    }
 
+    const splitNum = n.toString().split('');
+    let descendingOrderNum = '';
+
+    do {
+      descendingOrderNum += splitNum
+        .reduce((maxNum, elem) => +maxNum <= +elem ? elem : maxNum, 0);
+      splitNum.splice(splitNum.indexOf(descendingOrderNum[descendingOrderNum.length -1]), 1);
+    } while (splitNum.length);
+
+    return  +descendingOrderNum;
   }
+
+  console.log(descendingOrder(-42145)); // NaN
+  console.log(descendingOrder(42145.09)); // NaN
+  console.log(descendingOrder('NaN')); // NaN
 
   console.log(descendingOrder(42145)); // 54421
   console.log(descendingOrder(145263)); // 654321
