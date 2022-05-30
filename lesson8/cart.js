@@ -18,7 +18,7 @@ class ProductInCart extends Product {
     this.totalPrice = price;
   }
 
-  addProduct() {
+  incProduct() {
     this.number++;
     this.totalPrice = this.number * this.price;
   }
@@ -26,33 +26,28 @@ class ProductInCart extends Product {
 
 class Cart {
   constructor() {
-    this.products = [];
+    this.products = {};
     this.totalItems = 0;
     this.totalItemsPrice = 0;
   }
 
   addProduct(product) {
-    const productInCart = this.products
-      .find((el) => el.id === product.id);
-
-    if (!productInCart) {
-      this.products.push(new ProductInCart(
+    !(product.id in this.products)
+      ? this.products[product.id] = new ProductInCart(
         product.id,
         product.name,
-        product.price,
-      ));
-    } else {
-      productInCart.addProduct();
-    }
+        product.price)
+      : this.products[product.id].incProduct()
+    ;
 
-    this.totalItems = this.products
+    this.totalItems = Object.values(this.products)
       .reduce((total, item) => total + item.number, 0);
-    this.totalItemsPrice = this.products
+    this.totalItemsPrice = Object.values(this.products)
       .reduce((totalPrice, item) => totalPrice + item.number * item.price, 0);
   }
 
   makeHtmlForCartPopup() {
-    return this.products
+    return Object.values(this.products)
       .reduce((html, item) => html + `
         <div class="cart-info__data">
          <span>
@@ -84,32 +79,31 @@ document.querySelector('.cartIconWrap')
 
 featuredItemsEls
   .addEventListener('click', (e) => {
-    if (e.target.tagName === 'BUTTON') {
-      const id = e.target.dataset.item;
-      const productEL = featuredItemsEls
-        .querySelector(`.featuredItem[data-item="${id}"]`);
-
-      cart.addProduct(new Product(
-          id,
-          productEL
-            .querySelector('.featuredName').textContent
-            .trim(),
-          Number.parseInt(productEL
-            .querySelector('.featuredPrice').textContent
-            .trim()
-            .slice(1)
-          )
-        ));
-
-      document.querySelector('#cartInfoTotalProductsSum')
-        .textContent = cart.totalItemsPrice.toFixed(2);
-
-      document.querySelector('#cartInfoProductsData')
-        .innerHTML = cart.makeHtmlForCartPopup();
-
-      document.querySelector('.cartIconWrap__counter')
-        .textContent = cart.totalItems;
-
-      console.log(cart);
+    if (!e.target.classList.contains('add-product-to-cart')) {
+      return;
     }
+    const id = e.target.dataset.item;
+    const productEL = featuredItemsEls
+      .querySelector(`.featuredItem[data-item="${id}"]`);
+
+    cart.addProduct(new Product(
+      id,
+      productEL
+        .querySelector('.featuredName').textContent
+        .trim(),
+      Number.parseInt(productEL
+        .querySelector('.featuredPrice').textContent
+        .trim()
+        .slice(1)
+      )
+    ));
+
+    document.querySelector('#cartInfoTotalProductsSum')
+      .textContent = cart.totalItemsPrice.toFixed(2);
+
+    document.querySelector('#cartInfoProductsData')
+      .innerHTML = cart.makeHtmlForCartPopup();
+
+    document.querySelector('.cartIconWrap__counter')
+      .textContent = cart.totalItems;
   });
